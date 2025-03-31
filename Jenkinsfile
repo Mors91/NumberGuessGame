@@ -1,28 +1,24 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven'  // Ensure Maven is configured in Jenkins Global Tools
-        jdk 'JDK11'      // Ensure Java is configured (e.g., 'JDK11')
-    }
     stages {
         stage('Checkout') {
             steps {
                 git 'https://github.com/Mors91/NumberGuessGame.git'
             }
         }
-        stage('Build') {
+        stage('Build & Test') {
             steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                sh '''
+		    # verify Java/Maven exist
+                    java -version
+		    mvn -version
+	            mvn clean package test
+		'''
             }
         }
         stage('Deploy') {
             steps {
-                sh 'cp target/*.war /var/lib/tomcat/webapps/'  // Adjust path for your Tomcat server
+                sh 'sudo cp target/*.war /var/lib/tomcat/webapps/'  // Adjust path for your Tomcat server
             }
         }
     }
