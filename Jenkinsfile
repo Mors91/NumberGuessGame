@@ -3,9 +3,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+		dir ('subdirectory-with-pom') {
                 git 'https://github.com/Mors91/NumberGuessGame.git'
             }
         }
+	}
         stage('Build & Test') {
             steps {
                 sh '''
@@ -24,7 +26,7 @@ pipeline {
     }
     post {
         failure {
-            emailext body: 'Pipeline failed: ${BUILD_URL}', subject: 'Pipeline Failed', to: 'team@example.com'
+            mail body: 'Pipeline failed: ${BUILD_URL}', subject: 'Pipeline Failed', to: 'snrwhyte91@yahoo.com'
         }
     }
 }
