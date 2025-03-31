@@ -10,13 +10,9 @@ pipeline {
 	}
         stage('Build & Test') {
             steps {
-		dir('NumberGuessGame'){
-                sh '''
-		    # verify Java/Maven exist
-                    java -version
-		    mvn -version
-	            mvn clean package test
-		'''
+		dir('NumberGuessGame') {
+                sh
+		  'mvn clean package test'
             }
         }
 	}
