@@ -3,13 +3,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-		dir ('subdirectory-with-pom') {
+		dir ('NumberGuessGame') {
                 git 'https://github.com/Mors91/NumberGuessGame.git'
             }
         }
 	}
         stage('Build & Test') {
             steps {
+		dir('NumberGuessGame'){
                 sh '''
 		    # verify Java/Maven exist
                     java -version
@@ -18,6 +19,7 @@ pipeline {
 		'''
             }
         }
+	}
         stage('Deploy') {
             steps {
                 sh 'sudo cp target/*.war /var/lib/tomcat/webapps/'  // Adjust path for your Tomcat server
