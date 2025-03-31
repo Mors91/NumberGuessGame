@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'Maven'  // Ensure Maven is configured in Jenkins Global Tools
-        jdk 'JDK'      // Ensure Java is configured (e.g., 'JDK11')
+        jdk 'JDK11'      // Ensure Java is configured (e.g., 'JDK11')
     }
     stages {
         stage('Checkout') {
