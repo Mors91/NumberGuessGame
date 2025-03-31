@@ -21,8 +21,7 @@ pipeline {
         stage('Build & Test') {
             steps {
 		dir('NumberGuessGame') {
-                sh
-		  'mvn clean package test'
+                sh 'mvn clean package test'
             }
         }
 	}
